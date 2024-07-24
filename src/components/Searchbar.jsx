@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import { useState } from "react";
 import { Autocomplete, TextField, InputAdornment } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
@@ -11,9 +12,10 @@ const stocks = [
 	{ label: "Facebook" },
 ];
 
-function Searchbar() {
+function Searchbar({ setSelectedCompany }) {
 	const [inputValue, setInputValue] = useState("");
 	const [options, setOptions] = useState([]);
+	const [open, setOpen] = useState(false); // Manage open state
 
 	const handleInputChange = (event, newInputValue) => {
 		setInputValue(newInputValue);
@@ -33,10 +35,31 @@ function Searchbar() {
 		}
 	};
 
+	const handleChange = (event, newValue) => {
+		if (newValue) {
+			setSelectedCompany(newValue.label);
+			setInputValue(newValue.label); // Optional: Set the input value to the selected option
+		} else {
+			setSelectedCompany("");
+		}
+		setOpen(false); // Close the dropdown after selecting an option
+	};
+
+	const handleOpen = () => {
+		setOpen(true); // Open the dropdown when the user focuses on the input
+	};
+
+	const handleClose = () => {
+		setOpen(false); // Close the dropdown when the user clicks outside
+	};
+
 	return (
 		<Autocomplete
-			open={inputValue.length > 0} // Open dropdown only when inputValue has length
+			open={open} // Controlled open state
+			onOpen={handleOpen}
+			onClose={handleClose}
 			onInputChange={handleInputChange}
+			onChange={handleChange}
 			inputValue={inputValue}
 			options={options}
 			forcePopupIcon={false}
@@ -60,5 +83,10 @@ function Searchbar() {
 		/>
 	);
 }
+
+// Define prop types
+Searchbar.propTypes = {
+	setSelectedCompany: PropTypes.func.isRequired,
+};
 
 export default Searchbar;

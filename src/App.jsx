@@ -1,9 +1,12 @@
 import Searchbar from "./components/Searchbar";
-import Title from "./components/Title";
+import { useState } from "react";
+
 import DataTable from "./components/DataTable";
-import { Container, Box, Divider } from "@mui/material";
+import { Container, Box, Divider, Typography } from "@mui/material";
 
 const App = () => {
+	const [selectedCompany, setSelectedCompany] = useState("");
+
 	return (
 		<Container
 			sx={{
@@ -11,18 +14,42 @@ const App = () => {
 				display: "flex",
 				flexDirection: "column",
 				alignItems: "center",
-				pt: 4, // Adding padding at the top to space out from the top of the container
+				pt: 4,
 			}}
 		>
-			<Title />
-			<Searchbar />
-			<Divider sx={{ width: "100%", my: 4 }} />{" "}
-			{/* Full width divider with margin bottom */}
-			<Box sx={{ width: "100%" }}>
-				{" "}
-				{/* Margin top to create space above the DataTable */}
-				<DataTable />
+			<Box
+				sx={{
+					display: "flex",
+					flexDirection: "column",
+					alignItems: "center",
+					gap: "10px",
+				}}
+			>
+				<Typography variant={"h2"}>Welcome to Finance App</Typography>
+				<Searchbar setSelectedCompany={setSelectedCompany} />
 			</Box>
+			<Divider sx={{ width: "100%", my: 4 }} />{" "}
+			{selectedCompany && (
+				<Box
+					sx={{
+						display: "flex",
+						flexDirection: "column",
+						alignItems: "center",
+						width: "100%",
+					}}
+				>
+					{" "}
+					<Typography
+						variant={"h4"}
+						sx={{
+							mb: 4,
+						}}
+					>
+						{selectedCompany || "Company Name will go here"}
+					</Typography>
+					<DataTable />
+				</Box>
+			)}
 		</Container>
 	);
 };

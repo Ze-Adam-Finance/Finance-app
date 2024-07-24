@@ -21,7 +21,6 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 	"&:nth-of-type(odd)": {
 		backgroundColor: theme.palette.action.hover,
 	},
-	// hide last border
 	"&:last-child td, &:last-child th": {
 		border: 0,
 	},
@@ -45,20 +44,18 @@ function DataTable() {
 			<Table sx={{ minWidth: 700 }} aria-label="customized table">
 				<TableHead>
 					<TableRow>
-						<StyledTableCell>
-							Dessert (100g serving)
+						<StyledTableCell>Column One</StyledTableCell>
+						<StyledTableCell align="right">
+							Column Two
 						</StyledTableCell>
 						<StyledTableCell align="right">
-							Calories
+							Column Three
 						</StyledTableCell>
 						<StyledTableCell align="right">
-							Fat&nbsp;(g)
+							Column Four
 						</StyledTableCell>
 						<StyledTableCell align="right">
-							Carbs&nbsp;(g)
-						</StyledTableCell>
-						<StyledTableCell align="right">
-							Protein&nbsp;(g)
+							Column Five
 						</StyledTableCell>
 					</TableRow>
 				</TableHead>
