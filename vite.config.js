@@ -8,13 +8,10 @@ export default defineConfig({
 	build: {
 		outDir: "dist",
 	},
-	// Not sure is necessary
-	/* resolve: {
-    alias: [
-    {
-      find: './runtimeConfig',
-      replacement: './runtimeConfig.browser',
-    },
-  ]
-}, */
+	resolve: {
+		alias: {
+			"@mui/icons-material": "@mui/icons-material",
+			"@mui/material": "@mui/material",
+		},
+	},
 });
