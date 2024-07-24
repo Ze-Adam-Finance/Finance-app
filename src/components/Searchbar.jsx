@@ -1,14 +1,7 @@
 import { useState } from "react";
 import { Autocomplete, TextField, InputAdornment } from "@mui/material";
-import SearchIcon from "@mui/icons-material/Search"; // Import the Search icon
-
-/* import { styled } from '@mui/material/styles';
-
-const CustomTextField = styled(TextField)(({ theme }) => ({
-  '& .MuiAutocomplete-popupIndicator': {
-    display: 'none',
-  },
-})); */
+import SearchIcon from "@mui/icons-material/Search";
+import "../index.css";
 
 const stocks = [
 	{ label: "Apple" },
@@ -46,7 +39,9 @@ function Searchbar() {
 			onInputChange={handleInputChange}
 			inputValue={inputValue}
 			options={options}
+			forcePopupIcon={false}
 			getOptionLabel={(option) => option.label}
+			sx={{ width: "50%" }}
 			renderInput={(params) => (
 				<TextField
 					{...params}
