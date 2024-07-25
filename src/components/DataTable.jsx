@@ -6,6 +6,7 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
+import PropTypes from "prop-types";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
 	[`&.${tableCellClasses.head}`]: {
@@ -26,19 +27,7 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 	},
 }));
 
-function createData(name, calories, fat, carbs, protein) {
-	return { name, calories, fat, carbs, protein };
-}
-
-const rows = [
-	createData("Frozen yoghurt", 159, 6.0, 24, 4.0),
-	createData("Ice cream sandwich", 237, 9.0, 37, 4.3),
-	createData("Eclair", 262, 16.0, 24, 6.0),
-	createData("Cupcake", 305, 3.7, 67, 4.3),
-	createData("Gingerbread", 356, 16.0, 49, 3.9),
-];
-
-function DataTable() {
+function DataTable({ data }) {
 	return (
 		<TableContainer component={Paper}>
 			<Table sx={{ minWidth: 700 }} aria-label="customized table">
@@ -60,29 +49,49 @@ function DataTable() {
 					</TableRow>
 				</TableHead>
 				<TableBody>
-					{rows.map((row) => (
-						<StyledTableRow key={row.name}>
-							<StyledTableCell component="th" scope="row">
-								{row.name}
-							</StyledTableCell>
-							<StyledTableCell align="right">
-								{row.calories}
-							</StyledTableCell>
-							<StyledTableCell align="right">
-								{row.fat}
-							</StyledTableCell>
-							<StyledTableCell align="right">
-								{row.carbs}
-							</StyledTableCell>
-							<StyledTableCell align="right">
-								{row.protein}
+					{data.length > 0 ? (
+						data.map((row, index) => (
+							<StyledTableRow key={index}>
+								<StyledTableCell component="th" scope="row">
+									{row.name}
+								</StyledTableCell>
+								<StyledTableCell align="right">
+									{row.calories}
+								</StyledTableCell>
+								<StyledTableCell align="right">
+									{row.fat}
+								</StyledTableCell>
+								<StyledTableCell align="right">
+									{row.carbs}
+								</StyledTableCell>
+								<StyledTableCell align="right">
+									{row.protein}
+								</StyledTableCell>
+							</StyledTableRow>
+						))
+					) : (
+						<StyledTableRow>
+							<StyledTableCell colSpan={5} align="center">
+								No data available
 							</StyledTableCell>
 						</StyledTableRow>
-					))}
+					)}
 				</TableBody>
 			</Table>
 		</TableContainer>
 	);
 }
+
+DataTable.propTypes = {
+	data: PropTypes.arrayOf(
+		PropTypes.shape({
+			name: PropTypes.string,
+			calories: PropTypes.number,
+			fat: PropTypes.number,
+			carbs: PropTypes.number,
+			protein: PropTypes.number,
+		})
+	).isRequired,
+};
 
 export default DataTable;

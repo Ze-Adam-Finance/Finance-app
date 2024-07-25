@@ -1,13 +1,55 @@
 import Searchbar from "./components/Searchbar";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import DataTable from "./components/DataTable";
 import { Container, Box, Divider, Typography } from "@mui/material";
 
 const App = () => {
-	// State for rendering Table component
-	// When selectedCompany has a value, Table displayed
-	// setSelectedCompany passed to search bar which updates when company selected
 	const [selectedCompany, setSelectedCompany] = useState("");
+	const [companyData, setCompanyData] = useState([]);
+
+	const randomName = () => {
+		const names = [
+			"Alpha",
+			"Bravo",
+			"Charlie",
+			"Delta",
+			"Echo",
+			"Foxtrot",
+			"Golf",
+			"Hotel",
+			"India",
+			"Juliet",
+		];
+		return names[Math.floor(Math.random() * names.length)];
+	};
+
+	// Dummy function to simulate an API call
+	const fetchDataForCompany = async (company) => {
+		console.log(`Fetching data for company: ${company}`);
+		return new Promise((resolve) => {
+			setTimeout(() => {
+				const dummyData = Array.from({ length: 5 }, () => ({
+					name: `${randomName()} `,
+					calories: Math.floor(Math.random() * 500),
+					fat: Math.floor(Math.random() * 100) / 10,
+					carbs: Math.floor(Math.random() * 100),
+					protein: Math.floor(Math.random() * 50) / 10,
+				}));
+				console.log("Data fetched successfully");
+				resolve(dummyData);
+			}, 1000);
+		});
+	};
+
+	useEffect(() => {
+		if (selectedCompany) {
+			// Call the dummy function to simulate an API call
+			fetchDataForCompany(selectedCompany).then((data) => {
+				console.log("API call finished.");
+				setCompanyData(data); // Store the fetched data in state
+			});
+		}
+	}, [selectedCompany]); // Dependency array: useEffect will run when selectedCompany changes
 
 	return (
 		<Container
@@ -51,7 +93,7 @@ const App = () => {
 					>
 						{selectedCompany}
 					</Typography>
-					<DataTable />
+					<DataTable data={companyData} />
 				</Box>
 			)}
 		</Container>
