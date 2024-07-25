@@ -1,8 +1,14 @@
 import Searchbar from "./components/Searchbar";
-import Title from "./components/Title";
-import { Container, Box } from "@mui/material";
+import { useState } from "react";
+import DataTable from "./components/DataTable";
+import { Container, Box, Divider, Typography } from "@mui/material";
 
 const App = () => {
+	// State for rendering Table component
+	// When selectedCompany has a value, Table displayed
+	// setSelectedCompany passed to search bar which updates when company selected
+	const [selectedCompany, setSelectedCompany] = useState("");
+
 	return (
 		<Container
 			sx={{
@@ -10,10 +16,44 @@ const App = () => {
 				display: "flex",
 				flexDirection: "column",
 				alignItems: "center",
+				pt: 4,
 			}}
 		>
-			<Title />
-			<Searchbar />
+			<Box
+				sx={{
+					display: "flex",
+					flexDirection: "column",
+					alignItems: "center",
+					gap: "10px",
+				}}
+			>
+				<Typography variant={"h2"}>Finance App</Typography>
+				<Searchbar
+					setSelectedCompany={setSelectedCompany}
+					selectedCompany={selectedCompany}
+				/>
+			</Box>
+			<Divider sx={{ width: "100%", my: 4 }} />
+			{selectedCompany && (
+				<Box
+					sx={{
+						display: "flex",
+						flexDirection: "column",
+						alignItems: "center",
+						width: "100%",
+					}}
+				>
+					<Typography
+						variant={"h4"}
+						sx={{
+							mb: 4,
+						}}
+					>
+						{selectedCompany}
+					</Typography>
+					<DataTable />
+				</Box>
+			)}
 		</Container>
 	);
 };
