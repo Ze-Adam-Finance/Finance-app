@@ -27,7 +27,6 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 	},
 }));
 
-// data deconstructed for use in component
 function DataTable({ data }) {
 	console.log(data);
 	return (
@@ -39,9 +38,7 @@ function DataTable({ data }) {
 						<StyledTableCell align="right">
 							Exchange
 						</StyledTableCell>
-						<StyledTableCell align="right">
-							Price
-						</StyledTableCell>
+						<StyledTableCell align="right">Price</StyledTableCell>
 						<StyledTableCell align="right">
 							Market Cap
 						</StyledTableCell>
