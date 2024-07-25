@@ -30,7 +30,7 @@ TabPanel.propTypes = {
 	value: PropTypes.number.isRequired,
 };
 
-const TabsComponent = ({ companyData }) => {
+const TabsComponent = ({ companyData, chartData }) => {
 	const [value, setValue] = useState(0);
 
 	const handleChange = (event, newValue) => {
@@ -60,7 +60,7 @@ const TabsComponent = ({ companyData }) => {
 				<DataTable data={companyData} />
 			</TabPanel>
 			<TabPanel value={value} index={1}>
-				<RevenueChart/>
+				<RevenueChart data= {chartData} />
 			</TabPanel>
 		</Box>
 	);
@@ -68,6 +68,7 @@ const TabsComponent = ({ companyData }) => {
 
 TabsComponent.propTypes = {
 	companyData: PropTypes.array.isRequired,
+	chartData: PropTypes.array.isRequired,
 };
 
 export default TabsComponent;

@@ -3,8 +3,9 @@ import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContai
 
 
 
-function RevenueChart(randomShit) {
-  const data = [
+function RevenueChart({data}) {
+
+  /*const data = [
     {
       name: 'Page A',
       uv: 4000,
@@ -47,7 +48,7 @@ function RevenueChart(randomShit) {
       pv: 4300,
       amt: 2100,
     },
-  ];
+  ];*/
 
   return (
     <div style={{ width: 500, height: 250 }}>
@@ -62,10 +63,10 @@ function RevenueChart(randomShit) {
                 }}
             >
                 <CartesianGrid strokeDasharray="3 3" />
-                <XAxis dataKey="name" />
+                <XAxis dataKey="date" />
                 <YAxis />
                 <Tooltip />
-                <Area type="monotone" dataKey="uv" stroke="#8884d8" fill="#8884d8" />
+                <Area type="monotone" dataKey="close" stroke="#8884d8" fill="#8884d8" />
             </AreaChart>
         </ResponsiveContainer>
     </div>
