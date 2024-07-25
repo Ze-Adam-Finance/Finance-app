@@ -25,7 +25,6 @@ function Searchbar({ selectedCompany, setSelectedCompany }) {
 		if (debouncedInputValue.trim() !== "") {
 			setLoading(true);
 
-
 			fetch(
 				`https://financialmodelingprep.com/api/v3/search?query=${debouncedInputValue}&limit=20&apikey=9ea462a62531d93aa2be881a058c3951`
 			)
@@ -33,22 +32,16 @@ function Searchbar({ selectedCompany, setSelectedCompany }) {
 				.then((data) => {
 					const formattedOptions = data.map((item) => ({
 						id: item.symbol,
-						label: `${item.symbol} - ${item.name}`,
+						label: item.symbol + " - " + item.name,
 					}));
-  
-  				const formattedOptions = data.map((item) => ({
-								id: item.symbol,
-								label: item.symbol + " - " + item.name
-							}));
 
-							formattedOptions.sort((a, b) => {
-								const labelA = a.label.toLowerCase();
-								const labelB = b.label.toLowerCase();
-								if (labelA < labelB) return -1;
-								if (labelA > labelB) return 1;
-								return 0;
-							});
- 
+					formattedOptions.sort((a, b) => {
+						const labelA = a.label.toLowerCase();
+						const labelB = b.label.toLowerCase();
+						if (labelA < labelB) return -1;
+						if (labelA > labelB) return 1;
+						return 0;
+					});
 
 					setOptions(formattedOptions); // Update options with fetched data
 					setLoading(false); // Set loading to false after processing
