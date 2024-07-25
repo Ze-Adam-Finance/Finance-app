@@ -29,23 +29,24 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 
 // data deconstructed for use in component
 function DataTable({ data }) {
+	console.log(data);
 	return (
 		<TableContainer component={Paper}>
 			<Table sx={{ minWidth: 700 }} aria-label="customized table">
 				<TableHead>
 					<TableRow>
-						<StyledTableCell>Column One</StyledTableCell>
+						<StyledTableCell>Company Name</StyledTableCell>
 						<StyledTableCell align="right">
-							Column Two
+							Exchange
 						</StyledTableCell>
 						<StyledTableCell align="right">
-							Column Three
+							Price
 						</StyledTableCell>
 						<StyledTableCell align="right">
-							Column Four
+							Market Cap
 						</StyledTableCell>
 						<StyledTableCell align="right">
-							Column Five
+							Employees
 						</StyledTableCell>
 					</TableRow>
 				</TableHead>
@@ -54,19 +55,19 @@ function DataTable({ data }) {
 						data.map((row, index) => (
 							<StyledTableRow key={index}>
 								<StyledTableCell component="th" scope="row">
-									{row.name}
+									{row.companyName}
 								</StyledTableCell>
 								<StyledTableCell align="right">
-									{row.calories}
+									{row.exchangeShortName}
 								</StyledTableCell>
 								<StyledTableCell align="right">
-									{row.fat}
+									{row.price}
 								</StyledTableCell>
 								<StyledTableCell align="right">
-									{row.carbs}
+									{row.mktCap}
 								</StyledTableCell>
 								<StyledTableCell align="right">
-									{row.protein}
+									{row.fullTimeEmployees}
 								</StyledTableCell>
 							</StyledTableRow>
 						))
@@ -86,11 +87,42 @@ function DataTable({ data }) {
 DataTable.propTypes = {
 	data: PropTypes.arrayOf(
 		PropTypes.shape({
-			name: PropTypes.string,
-			calories: PropTypes.number,
-			fat: PropTypes.number,
-			carbs: PropTypes.number,
-			protein: PropTypes.number,
+			symbol: PropTypes.string,
+			price: PropTypes.number,
+			beta: PropTypes.number,
+			volAvg: PropTypes.number,
+			mktCap: PropTypes.number,
+			lastDiv: PropTypes.number,
+			range: PropTypes.string,
+			changes: PropTypes.number,
+			companyName: PropTypes.string,
+			currency: PropTypes.string,
+			cik: PropTypes.string,
+			isin: PropTypes.string,
+			cusip: PropTypes.string,
+			exchange: PropTypes.string,
+			exchangeShortName: PropTypes.string,
+			industry: PropTypes.string,
+			website: PropTypes.string,
+			description: PropTypes.string,
+			ceo: PropTypes.string,
+			sector: PropTypes.string,
+			country: PropTypes.string,
+			fullTimeEmployees: PropTypes.string,
+			phone: PropTypes.string,
+			address: PropTypes.string,
+			city: PropTypes.string,
+			state: PropTypes.string,
+			zip: PropTypes.string,
+			dcfDiff: PropTypes.number,
+			dcf: PropTypes.number,
+			image: PropTypes.string,
+			ipoDate: PropTypes.string,
+			defaultImage: PropTypes.bool,
+			isEtf: PropTypes.bool,
+			isActivelyTrading: PropTypes.bool,
+			isAdr: PropTypes.bool,
+			isFund: PropTypes.bool,
 		})
 	).isRequired,
 };

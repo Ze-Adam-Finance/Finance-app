@@ -28,19 +28,35 @@ const App = () => {
 	// REPLACE WITH FUNCTION WITH API
 	const fetchDataForCompany = async (company) => {
 		console.log(`Fetching data for company: ${company}`);
-		return new Promise((resolve) => {
-			setTimeout(() => {
-				const dummyData = Array.from({ length: 5 }, () => ({
-					name: `${randomName()} `,
-					calories: Math.floor(Math.random() * 500),
-					fat: Math.floor(Math.random() * 100) / 10,
-					carbs: Math.floor(Math.random() * 100),
-					protein: Math.floor(Math.random() * 50) / 10,
-				}));
-				console.log("Data fetched successfully");
-				resolve(dummyData);
-			}, 1000);
-		});
+		try {
+
+			company = company.split("-")[0].trim();
+
+            const response1 = await fetch(`https://financialmodelingprep.com/api/v3/profile/${company}?apikey=9ea462a62531d93aa2be881a058c3951`);
+            const profileData = await response1.json();
+
+            //const response2 = await fetch(`https://fmpcloud.io/api/v3/historical-price-full/${company}?serietype=line&apikey=9ea462a62531d93aa2be881a058c3951`);
+            //const historicalData = await response2.json();
+
+            /*const companyData = {
+                stockTicker: {
+                    status_code: response1.status,
+                    body: profileData
+                },
+                historicalPriceData: {
+                    status_code: response2.status,
+                    body: historicalData
+                }
+            };*/
+
+			const companyData = profileData;
+
+			console.log(companyData)
+
+			return companyData
+		} catch (error) {
+            console.error("Error fetching company data:", error);
+        }
 	};
 
 	// useEffect runs when value of dependancy array changes
