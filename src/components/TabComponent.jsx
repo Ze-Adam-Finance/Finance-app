@@ -2,6 +2,7 @@ import { useState } from "react";
 import PropTypes from "prop-types";
 import { Box, Tabs, Tab, Typography } from "@mui/material";
 import DataTable from "./DataTable";
+import RevenueChart from "./RevenueChart";
 
 const TabPanel = (props) => {
 	const { children, value, index, ...other } = props;
@@ -59,7 +60,7 @@ const TabsComponent = ({ companyData }) => {
 				<DataTable data={companyData} />
 			</TabPanel>
 			<TabPanel value={value} index={1}>
-				<Typography>Graph Placeholder</Typography>
+				<RevenueChart/>
 			</TabPanel>
 		</Box>
 	);
