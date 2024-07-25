@@ -1,42 +1,73 @@
 import PropTypes from "prop-types";
-import { useState } from "react";
-import { Autocomplete, TextField, InputAdornment } from "@mui/material";
+import { useState, useMemo } from "react";
+import {
+	Autocomplete,
+	TextField,
+	InputAdornment,
+	CircularProgress,
+} from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
+import { debounce } from "lodash";
 import "../index.css";
-
-const companies = [
-	{ label: "Apple" },
-	{ label: "Google" },
-	{ label: "Microsoft" },
-	{ label: "Amazon" },
-	{ label: "Facebook" },
-];
 
 // eslint-disable-next-line react/prop-types
 function Searchbar({ selectedCompany, setSelectedCompany }) {
 	const [inputValue, setInputValue] = useState("");
 	const [options, setOptions] = useState([]);
+	const [loading, setLoading] = useState(false);
 	const [open, setOpen] = useState(false);
 
+	// Debounced function to fetch options
+	const debounceFetchOptions = useMemo(
+		() =>
+			debounce((newInputValue) => {
+				if (newInputValue.trim() !== "") {
+					setLoading(true);
+
+					const myHeaders = new Headers();
+					myHeaders.append("Content-Type", "application/json");
+
+					const raw = JSON.stringify({ searchText: newInputValue });
+
+					const requestOptions = {
+						method: "POST",
+						headers: myHeaders,
+						body: raw,
+						redirect: "follow",
+					};
+
+					fetch(
+						"https://accg99fghl.execute-api.eu-north-1.amazonaws.com/prod",
+						requestOptions
+					)
+						.then((results) => results.json())
+						.then((data) => {
+							const formattedOptions = data.body.map((item) => ({
+								id: item.symbol,
+								label: item.symbol + " - " + item.name,
+							}));
+							setOptions(formattedOptions); // Update options with fetched data
+							setLoading(false); // Set loading to false after processing
+						})
+						.catch((error) => {
+							console.error("Error fetching options:", error);
+							setLoading(false); // Set loading to false even on error
+						});
+				} else {
+					setOptions([]);
+					setOpen(false);
+				}
+			}, 500),
+		[]
+	);
+
+	// Handles changes to the input field
 	const handleInputChange = (event, newInputValue) => {
 		setInputValue(newInputValue);
-
-		// Show options only if input is not empty
-		if (newInputValue.trim() !== "") {
-			// Filter options based on input value
-			setOptions(
-				companies.filter((option) =>
-					option.label
-						.toLowerCase()
-						.includes(newInputValue.toLowerCase())
-				)
-			);
-			setOpen(true);
-		} else {
-			setOptions([]);
-			setOpen(false);
-		}
+		debounceFetchOptions(newInputValue);
+		setOpen(newInputValue.trim() !== ""); // Open dropdown if input is not empty
 	};
+
 	// Handles selection of an option from the dropdown
 	const handleChange = (event, newValue) => {
 		if (newValue) {
@@ -62,7 +93,9 @@ function Searchbar({ selectedCompany, setSelectedCompany }) {
 				options.find((option) => option.label === selectedCompany) ||
 				null
 			}
-			disableCloseOnSelect={false} // This ensures that the dropdown does not immediately close
+			disableCloseOnSelect={false} // Ensures the dropdown does not immediately close
+			noOptionsText="No options"
+			loading={loading}
 			clearOnBlur={true}
 			getOptionLabel={(option) => option.label}
 			sx={{ width: "100%" }}
@@ -70,13 +103,27 @@ function Searchbar({ selectedCompany, setSelectedCompany }) {
 				<TextField
 					{...params}
 					label="Search Companies"
+					placeholder="Type to search..."
 					InputProps={{
 						...params.InputProps,
 						startAdornment: (
 							<InputAdornment position="start">
 								<SearchIcon />
+								{loading && (
+									<CircularProgress
+										color="inherit"
+										size={20}
+										sx={{ ml: 2 }}
+									/>
+								)}
 							</InputAdornment>
 						),
+						endAdornment: null, // Hide the default dropdown arrow
+					}}
+					sx={{
+						"& .MuiAutocomplete-endAdornment": {
+							display: "none", // Hide the default end adornment which includes the dropdown arrow
+						},
 					}}
 				/>
 			)}
