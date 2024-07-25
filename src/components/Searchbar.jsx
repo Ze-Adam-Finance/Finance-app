@@ -2,6 +2,7 @@ import PropTypes from "prop-types";
 import { useState } from "react";
 import { Autocomplete, TextField, InputAdornment } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
+import useDebounce from "../hooks/useDebounce";
 import "../index.css";
 
 const stocks = [
@@ -16,10 +17,8 @@ function Searchbar({ setSelectedCompany }) {
 	const [inputValue, setInputValue] = useState("");
 	const [options, setOptions] = useState([]);
 
-	const handleInputChange = (event, newInputValue) => {
-		setInputValue(newInputValue);
-
-		// Show options only if input is not empty
+	// Debounced function to fetch options
+	const debounceFetchOptions = useDebounce((newInputValue) => {
 		if (newInputValue.trim() !== "") {
 			// Filter options based on input value
 			setOptions(
@@ -32,6 +31,11 @@ function Searchbar({ setSelectedCompany }) {
 		} else {
 			setOptions([]);
 		}
+	}, 500);
+
+	const handleInputChange = (event, newInputValue) => {
+		setInputValue(newInputValue);
+		debounceFetchOptions(newInputValue);
 	};
 
 	const handleChange = (event, newValue) => {
