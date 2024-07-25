@@ -27,7 +27,7 @@ const App = () => {
 		}
 	};
 
-	const fetchDataForGraph = async (company) => {
+	const chartDatafetchDataForChart = async (company) => {
 		console.log(`Fetching graph data for company: ${company}`);
 		try {
 			company = company.split("-")[0].trim();
@@ -59,7 +59,7 @@ const App = () => {
 				console.log("API call finished.", data);
 				setCompanyData(data);
 			});
-			fetchDataForGraph(selectedCompany).then((data) => {
+			chartDatafetchDataForChart(selectedCompany).then((data) => {
 				console.log("API call finished.", data);
 				setChartData(data);
 			});
@@ -84,7 +84,7 @@ const App = () => {
 					gap: "10px",
 				}}
 			>
-				<Typography variant={"h2"}>Finance App</Typography>
+				<Typography component={'span'} variant={"h2"}>Finance App</Typography>
 				<Searchbar
 					setSelectedCompany={setSelectedCompany}
 					selectedCompany={selectedCompany}
@@ -101,6 +101,7 @@ const App = () => {
 					}}
 				>
 					<Typography
+						component={'span'}
 						variant={"h4"}
 						sx={{
 							mb: 4,

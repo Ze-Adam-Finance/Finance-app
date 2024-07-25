@@ -17,7 +17,7 @@ const TabPanel = (props) => {
 		>
 			{value === index && (
 				<Box sx={{ p: 3 }}>
-					<Typography>{children}</Typography>
+					{children}
 				</Box>
 			)}
 		</div>
@@ -60,7 +60,7 @@ const TabsComponent = ({ companyData, chartData }) => {
 				<DataTable data={companyData} />
 			</TabPanel>
 			<TabPanel value={value} index={1}>
-				<RevenueChart data= {chartData} />
+				<RevenueChart data={chartData} />
 			</TabPanel>
 		</Box>
 	);
