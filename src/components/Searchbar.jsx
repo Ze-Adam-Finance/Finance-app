@@ -15,7 +15,6 @@ const stocks = [
 function Searchbar({ setSelectedCompany }) {
 	const [inputValue, setInputValue] = useState("");
 	const [options, setOptions] = useState([]);
-	const [open, setOpen] = useState(false); // Manage open state
 
 	const handleInputChange = (event, newInputValue) => {
 		setInputValue(newInputValue);
@@ -38,33 +37,22 @@ function Searchbar({ setSelectedCompany }) {
 	const handleChange = (event, newValue) => {
 		if (newValue) {
 			setSelectedCompany(newValue.label);
-			setInputValue(newValue.label); // Optional: Set the input value to the selected option
+			setInputValue(newValue.label);
 		} else {
 			setSelectedCompany("");
 		}
-		setOpen(false); // Close the dropdown after selecting an option
-	};
-
-	const handleOpen = () => {
-		setOpen(true); // Open the dropdown when the user focuses on the input
-	};
-
-	const handleClose = () => {
-		setOpen(false); // Close the dropdown when the user clicks outside
 	};
 
 	return (
 		<Autocomplete
-			open={open} // Controlled open state
-			onOpen={handleOpen}
-			onClose={handleClose}
+			open={inputValue.length > 0 && options.length > 0}
 			onInputChange={handleInputChange}
 			onChange={handleChange}
 			inputValue={inputValue}
 			options={options}
 			forcePopupIcon={false}
 			getOptionLabel={(option) => option.label}
-			sx={{ width: "50%" }}
+			sx={{ width: "100%" }}
 			renderInput={(params) => (
 				<TextField
 					{...params}

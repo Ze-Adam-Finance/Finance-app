@@ -25,7 +25,7 @@ const App = () => {
 					gap: "10px",
 				}}
 			>
-				<Typography variant={"h2"}>Welcome to Finance App</Typography>
+				<Typography variant={"h2"}>Finance App</Typography>
 				<Searchbar setSelectedCompany={setSelectedCompany} />
 			</Box>
 			<Divider sx={{ width: "100%", my: 4 }} />{" "}
