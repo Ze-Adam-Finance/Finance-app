@@ -27,7 +27,7 @@ const App = () => {
 		}
 	};
 
-	const chartDatafetchDataForChart = async (company) => {
+	const fetchDataForChart = async (company) => {
 		console.log(`Fetching graph data for company: ${company}`);
 		try {
 			company = company.split("-")[0].trim();
@@ -51,7 +51,7 @@ const App = () => {
 		} catch (error) {
 			console.error("Error fetching graph data:", error);
 		}
-	};
+	}; //https://financialmodelingprep.com/api/v3/income-statement/AAPL?period=annual -> new api for financial statements
 
 	useEffect(() => {
 		if (selectedCompany) {
@@ -59,7 +59,7 @@ const App = () => {
 				console.log("API call finished.", data);
 				setCompanyData(data);
 			});
-			chartDatafetchDataForChart(selectedCompany).then((data) => {
+			fetchDataForChart(selectedCompany).then((data) => {
 				console.log("API call finished.", data);
 				setChartData(data);
 			});
