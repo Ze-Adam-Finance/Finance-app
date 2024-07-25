@@ -2,6 +2,7 @@ import { useState } from "react";
 import PropTypes from "prop-types";
 import { Box, Tabs, Tab, Typography } from "@mui/material";
 import DataTable from "./DataTable";
+import RevenueChart from "./RevenueChart";
 
 const TabPanel = (props) => {
 	const { children, value, index, ...other } = props;
@@ -16,7 +17,7 @@ const TabPanel = (props) => {
 		>
 			{value === index && (
 				<Box sx={{ p: 3 }}>
-					<Typography>{children}</Typography>
+					{children}
 				</Box>
 			)}
 		</div>
@@ -29,7 +30,7 @@ TabPanel.propTypes = {
 	value: PropTypes.number.isRequired,
 };
 
-const TabsComponent = ({ companyData }) => {
+const TabsComponent = ({ companyData, chartData }) => {
 	const [value, setValue] = useState(0);
 
 	const handleChange = (event, newValue) => {
@@ -49,17 +50,17 @@ const TabsComponent = ({ companyData }) => {
 			<Tabs
 				value={value}
 				onChange={handleChange}
-				aria-label="data and graph tabs"
+				aria-label="data and chart tabs"
 				centered
 			>
 				<Tab label="Data Table" />
-				<Tab label="Graph" />
+				<Tab label="Charts" />
 			</Tabs>
 			<TabPanel value={value} index={0}>
 				<DataTable data={companyData} />
 			</TabPanel>
 			<TabPanel value={value} index={1}>
-				<Typography>Graph Placeholder</Typography>
+				<RevenueChart data={chartData} />
 			</TabPanel>
 		</Box>
 	);
@@ -67,6 +68,7 @@ const TabsComponent = ({ companyData }) => {
 
 TabsComponent.propTypes = {
 	companyData: PropTypes.array.isRequired,
+	chartData: PropTypes.array.isRequired,
 };
 
 export default TabsComponent;

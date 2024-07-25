@@ -6,18 +6,18 @@ import TabComponent from "./components/TabComponent";
 const App = () => {
 	const [selectedCompany, setSelectedCompany] = useState("");
 	const [companyData, setCompanyData] = useState([]);
+	const [chartData, setChartData] = useState([]);
+
 
 	const fetchDataForCompany = async (company) => {
-		console.log(`Fetching data for company: ${company}`);
+		console.log(`Fetching table data for company: ${company}`);
 		try {
 			company = company.split("-")[0].trim();
 
-			const response1 = await fetch(
+			const response = await fetch(
 				`https://financialmodelingprep.com/api/v3/profile/${company}?apikey=9ea462a62531d93aa2be881a058c3951`
 			);
-			const profileData = await response1.json();
-
-			const companyData = profileData;
+			const companyData = await response.json();
 
 			console.log(companyData);
 
@@ -27,11 +27,41 @@ const App = () => {
 		}
 	};
 
+	const fetchDataForChart = async (company) => {
+		console.log(`Fetching graph data for company: ${company}`);
+		try {
+			company = company.split("-")[0].trim();
+
+			const response = await fetch(
+				`https://fmpcloud.io/api/v3/historical-price-full/${company}?serietype=line&apikey=9ea462a62531d93aa2be881a058c3951`
+			);
+			const chartData = await response.json();
+
+			console.log(chartData.historical);
+
+			chartData.historical.sort((a, b) => {
+				const labelA = a.date.toLowerCase();
+				const labelB = b.date.toLowerCase();
+				if (labelA < labelB) return -1;
+				if (labelA > labelB) return 1;
+				return 0;
+			});
+
+			return chartData.historical;
+		} catch (error) {
+			console.error("Error fetching graph data:", error);
+		}
+	}; //https://financialmodelingprep.com/api/v3/income-statement/AAPL?period=annual -> new api for financial statements
+
 	useEffect(() => {
 		if (selectedCompany) {
 			fetchDataForCompany(selectedCompany).then((data) => {
 				console.log("API call finished.", data);
 				setCompanyData(data);
+			});
+			fetchDataForChart(selectedCompany).then((data) => {
+				console.log("API call finished.", data);
+				setChartData(data);
 			});
 		}
 	}, [selectedCompany]);
@@ -54,7 +84,7 @@ const App = () => {
 					gap: "10px",
 				}}
 			>
-				<Typography variant={"h2"}>Finance App</Typography>
+				<Typography component={'span'} variant={"h2"}>Finance App</Typography>
 				<Searchbar
 					setSelectedCompany={setSelectedCompany}
 					selectedCompany={selectedCompany}
@@ -71,6 +101,7 @@ const App = () => {
 					}}
 				>
 					<Typography
+						component={'span'}
 						variant={"h4"}
 						sx={{
 							mb: 4,
@@ -78,7 +109,7 @@ const App = () => {
 					>
 						{selectedCompany}
 					</Typography>
-					<TabComponent companyData={companyData} />
+					<TabComponent companyData={companyData} chartData={chartData} />
 				</Box>
 			)}
 		</Container>
