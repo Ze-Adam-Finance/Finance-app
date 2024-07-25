@@ -7,7 +7,7 @@ import {
 	CircularProgress,
 } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
-import { debounce } from "lodash";
+import _ from "lodash";
 
 import "../index.css";
 
