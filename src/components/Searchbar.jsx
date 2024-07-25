@@ -7,7 +7,8 @@ import {
 	CircularProgress,
 } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
-import { debounce } from "lodash";
+import _, { debounce } from "lodash";
+
 import "../index.css";
 
 // eslint-disable-next-line react/prop-types
@@ -24,23 +25,27 @@ function Searchbar({ selectedCompany, setSelectedCompany }) {
 				if (newInputValue.trim() !== "") {
 					setLoading(true);
 
-					fetch("https://financialmodelingprep.com/api/v3/search?query=" + newInputValue + "&limit=20" + "&apikey=9ea462a62531d93aa2be881a058c3951")
+					fetch(
+						"https://financialmodelingprep.com/api/v3/search?query=" +
+							newInputValue +
+							"&limit=20" +
+							"&apikey=9ea462a62531d93aa2be881a058c3951"
+					)
 						.then((results) => results.json())
 						.then((data) => {
-
-              //console.log(data)
+							//console.log(data)
 							const formattedOptions = data.map((item) => ({
 								id: item.symbol,
-								label: item.symbol + " - " + item.name
+								label: item.symbol + " - " + item.name,
 							}));
 
-              formattedOptions.sort((a, b) => {
-                const labelA = a.label.toLowerCase();
-                const labelB = b.label.toLowerCase();
-                if (labelA < labelB) return -1;
-                if (labelA > labelB) return 1;
-                return 0;
-              });
+							formattedOptions.sort((a, b) => {
+								const labelA = a.label.toLowerCase();
+								const labelB = b.label.toLowerCase();
+								if (labelA < labelB) return -1;
+								if (labelA > labelB) return 1;
+								return 0;
+							});
 
 							setOptions(formattedOptions); // Update options with fetched data
 							setLoading(false); // Set loading to false after processing
