@@ -49,11 +49,11 @@ const TabsComponent = ({ companyData }) => {
 			<Tabs
 				value={value}
 				onChange={handleChange}
-				aria-label="data and graph tabs"
+				aria-label="data and chart tabs"
 				centered
 			>
 				<Tab label="Data Table" />
-				<Tab label="Graph" />
+				<Tab label="Charts" />
 			</Tabs>
 			<TabPanel value={value} index={0}>
 				<DataTable data={companyData} />
