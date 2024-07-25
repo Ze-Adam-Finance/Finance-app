@@ -24,25 +24,10 @@ function Searchbar({ selectedCompany, setSelectedCompany }) {
 				if (newInputValue.trim() !== "") {
 					setLoading(true);
 
-					const myHeaders = new Headers();
-					myHeaders.append("Content-Type", "application/json");
-
-					const raw = JSON.stringify({ searchText: newInputValue });
-
-					const requestOptions = {
-						method: "POST",
-						headers: myHeaders,
-						body: raw,
-						redirect: "follow",
-					};
-
-					fetch(
-						"https://accg99fghl.execute-api.eu-north-1.amazonaws.com/prod",
-						requestOptions
-					)
+					fetch("https://financialmodelingprep.com/api/v3/search?query=" + newInputValue + "&limit=20" + "&apikey=9ea462a62531d93aa2be881a058c3951")
 						.then((results) => results.json())
 						.then((data) => {
-							const formattedOptions = data.body.map((item) => ({
+							const formattedOptions = data.map((item) => ({
 								id: item.symbol,
 								label: item.symbol + " - " + item.name,
 							}));
