@@ -5,8 +5,10 @@ import { Container, Box, Divider, Typography } from "@mui/material";
 
 const App = () => {
 	const [selectedCompany, setSelectedCompany] = useState("");
+	// companyData state initialised
 	const [companyData, setCompanyData] = useState([]);
 
+	// GET RID OF THIS, NOT NEEDED -  REPLACE WITH COLUMN LABELS IN DATA TABLE
 	const randomName = () => {
 		const names = [
 			"Alpha",
@@ -23,7 +25,7 @@ const App = () => {
 		return names[Math.floor(Math.random() * names.length)];
 	};
 
-	// Dummy function to simulate an API call
+	// REPLACE WITH FUNCTION WITH API
 	const fetchDataForCompany = async (company) => {
 		console.log(`Fetching data for company: ${company}`);
 		return new Promise((resolve) => {
@@ -41,15 +43,18 @@ const App = () => {
 		});
 	};
 
+	// useEffect runs when value of dependancy array changes
 	useEffect(() => {
+		// 2. And a value is present for selectedCompany
 		if (selectedCompany) {
-			// Call the dummy function to simulate an API call
+			// 3. then API function is run
 			fetchDataForCompany(selectedCompany).then((data) => {
-				console.log("API call finished.");
-				setCompanyData(data); // Store the fetched data in state
+				console.log("API call finished.", data);
+				setCompanyData(data);
 			});
 		}
-	}, [selectedCompany]); // Dependency array: useEffect will run when selectedCompany changes
+		// 1. when value of selectedCompany changes...
+	}, [selectedCompany]);
 
 	return (
 		<Container
@@ -93,6 +98,7 @@ const App = () => {
 					>
 						{selectedCompany}
 					</Typography>
+					{/* data passed to component as companyData */}
 					<DataTable data={companyData} />
 				</Box>
 			)}

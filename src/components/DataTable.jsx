@@ -27,6 +27,7 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 	},
 }));
 
+// data deconstructed for use in component
 function DataTable({ data }) {
 	return (
 		<TableContainer component={Paper}>
