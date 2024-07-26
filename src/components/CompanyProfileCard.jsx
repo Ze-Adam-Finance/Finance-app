@@ -8,8 +8,9 @@ import {
 	Box,
 } from "@mui/material";
 import ProfileTable from "./ProfileTable";
+import PriceChart from "./PriceChart";
 
-const CompanyProfileCard = ({ data }) => {
+const CompanyProfileCard = ({ companyData, chartData }) => {
 	const {
 		description = "",
 		image,
@@ -27,7 +28,7 @@ const CompanyProfileCard = ({ data }) => {
 		lastDiv,
 		mktCap,
 		ipoDate,
-	} = data;
+	} = companyData;
 
 	const leftTableData = [
 		{
@@ -58,7 +59,6 @@ const CompanyProfileCard = ({ data }) => {
 
 	const handleImageError = (e) => {
 		e.target.onerror = null;
-		// e.target.style.display = 'none'
 		e.target.src =
 			"https://img.freepik.com/premium-vector/default-image-icon-vector-missing-picture-page-website-design-mobile-app-no-photo-available_87543-11093.jpg";
 	};
@@ -108,7 +108,9 @@ const CompanyProfileCard = ({ data }) => {
 						</Box>
 					</Grid>
 				</Grid>
-
+				<Box>
+					<PriceChart data={chartData} />
+				</Box>
 				<Grid container spacing={4} mt={1}>
 					<Grid item xs={12} sm={6}>
 						<ProfileTable data={leftTableData} />
@@ -123,27 +125,8 @@ const CompanyProfileCard = ({ data }) => {
 };
 
 CompanyProfileCard.propTypes = {
-	data: PropTypes.shape({
-		description: PropTypes.string,
-		image: PropTypes.string,
-		exchange: PropTypes.string,
-		exchangeShortName: PropTypes.string,
-		industry: PropTypes.string,
-		sector: PropTypes.string,
-		isActivelyTrading: PropTypes.bool,
-		ceo: PropTypes.string,
-		fullTimeEmployees: PropTypes.oneOfType([
-			PropTypes.string,
-			PropTypes.number,
-		]),
-		currency: PropTypes.string,
-		price: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-		changes: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-		range: PropTypes.string,
-		lastDiv: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-		mktCap: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-		ipoDate: PropTypes.string,
-	}).isRequired,
+	companyData: PropTypes.object.isRequired,
+	chartData: PropTypes.array.isRequired,
 };
 
 export default CompanyProfileCard;
