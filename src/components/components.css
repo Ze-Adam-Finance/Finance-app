@@ -1,0 +1,14 @@
+.ratioButton {
+    border: 1px solid #8884d8;
+    border-radius: 4px;
+    padding: 5px 10px;
+    background: 'transparent';
+    color: '#8884d8';
+    cursor: 'pointer';
+
+}
+
+.ratioButton:hover {
+    background-color: #f0f0f0;
+    transition: 'background 0.3s ease';
+}

@@ -2,66 +2,23 @@ import Searchbar from "./components/Searchbar";
 import { useState, useEffect } from "react";
 import { Container, Box, Divider, Typography } from "@mui/material";
 import TabComponent from "./components/TabComponent";
+import { getFullCompanyData } from "./api/getFullCompanyData";
 
 const App = () => {
 	const [selectedCompany, setSelectedCompany] = useState("");
 	const [companyData, setCompanyData] = useState({});
 	const [chartData, setChartData] = useState([]);
-
-	const fetchDataForCompany = async (company) => {
-		console.log(`Fetching table data for company: ${company}`);
-		try {
-			company = company.split("-")[0].trim();
-
-			const response = await fetch(
-				`https://financialmodelingprep.com/api/v3/profile/${company}?apikey=9ea462a62531d93aa2be881a058c3951`
-			);
-			const companyData = await response.json();
-
-			console.log(companyData);
-
-			// Ensure data is in the form of an object
-			return companyData[0] || {}; // Assuming the API returns an array with one object
-		} catch (error) {
-			console.error("Error fetching company data:", error);
-		}
-	};
-
-	const fetchDataForChart = async (company) => {
-		console.log(`Fetching graph data for company: ${company}`);
-		try {
-			company = company.split("-")[0].trim();
-
-			const response = await fetch(
-				`https://fmpcloud.io/api/v3/historical-price-full/${company}?serietype=line&apikey=9ea462a62531d93aa2be881a058c3951`
-			);
-			const chartData = await response.json();
-
-			console.log(chartData.historical);
-
-			chartData.historical.sort((a, b) => {
-				const labelA = a.date.toLowerCase();
-				const labelB = b.date.toLowerCase();
-				if (labelA < labelB) return -1;
-				if (labelA > labelB) return 1;
-				return 0;
-			});
-
-			return chartData.historical;
-		} catch (error) {
-			console.error("Error fetching graph data:", error);
-		}
-	};
+	const [incomeStatementData, setIncomeStatementData] = useState([]);
+	const [ratiosData, setRatiosData] = useState([]);
 
 	useEffect(() => {
 		if (selectedCompany) {
-			fetchDataForCompany(selectedCompany).then((data) => {
+			getFullCompanyData(selectedCompany).then((data) => {
 				console.log("API call finished.", data);
-				setCompanyData(data);
-			});
-			fetchDataForChart(selectedCompany).then((data) => {
-				console.log("API call finished.", data);
-				setChartData(data);
+				setCompanyData(data.companyData);
+				setChartData(data.chartData);
+				setIncomeStatementData(data.incomeStatementData);
+				setRatiosData(data.ratiosData);
 			});
 		}
 	}, [selectedCompany]);
@@ -141,10 +98,9 @@ const App = () => {
 					>
 						{selectedCompany}
 					</Typography>
-					<TabComponent
-						companyData={companyData}
-						chartData={chartData}
-					/>
+
+					<TabComponent companyData={companyData} chartData={chartData} incomeStatementData={incomeStatementData} ratiosData ={ratiosData} />
+
 				</Box>
 			)}
 		</Container>
