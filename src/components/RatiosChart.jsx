@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip } from 'recharts';
+import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 import "./components.css"
 
 const RatiosChart = ({ data }) => {
@@ -11,11 +11,11 @@ const RatiosChart = ({ data }) => {
   };
 
   return (
-    <div>
+    <ResponsiveContainer width={500} height={250}>
       <AreaChart
         key={selectedColumn} // Force remount on selected column change
         width={500}
-        height={300}
+        height={250}
         data={data}
         animationDuration={500}
         animationEasing="ease-out"
@@ -35,7 +35,7 @@ const RatiosChart = ({ data }) => {
         <button className="ratioButton" onClick={() => handleColumnChange('priceEarningsToGrowthRatio')} >PEG</button>
         <button className="ratioButton" onClick={() => handleColumnChange('debtEquityRatio')} >Debt/Equity</button>
       </div>
-    </div>
+    </ResponsiveContainer>
   );
 };
 

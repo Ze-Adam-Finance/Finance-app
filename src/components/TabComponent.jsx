@@ -65,8 +65,23 @@ const TabsComponent = ({
 				/>
 			</TabPanel>
 			<TabPanel value={value} index={1}>
-				<RevenueExpensesProfit data={incomeStatementData} />
-				<RatiosChart data={ratiosData} />
+				<Box
+						sx={{
+							display: "flex",
+							justifyContent: "space-between",
+							alignItems: "center",
+							width: "100%",
+							gap: "10%",
+							mt: "5%"
+						}}
+					>
+						<Box sx={{ flex: 1 }}>
+							<RevenueExpensesProfit data={incomeStatementData} />
+						</Box>
+						<Box sx={{ flex: 1 }}>
+							<RatiosChart data={ratiosData} />
+						</Box>
+					</Box>
 			</TabPanel>
 		</Box>
 	);
