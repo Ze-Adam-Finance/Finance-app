@@ -31,11 +31,22 @@ export async function getFullCompanyData(company) {
 			]);
 
 		//reorder
-		chartData.historical.sort(
-			(a, b) => new Date(a.date) - new Date(b.date)
-		);
-		incomeStatementData.sort((a, b) => new Date(a.date) - new Date(b.date));
-		ratiosData.sort((a, b) => new Date(a.date) - new Date(b.date));
+    console.log(chartData)
+
+		if(chartData.length > 0) {
+      chartData.historical.sort(
+        (a, b) => new Date(a.date) - new Date(b.date)
+      );
+    }
+
+    if(incomeStatementData.length > 0) {
+      incomeStatementData.sort((a, b) => new Date(a.date) - new Date(b.date));
+    }
+
+    if(ratiosData. length > 0) {
+      ratiosData.sort((a, b) => new Date(a.date) - new Date(b.date));
+    }
+
 
 		//calculate full costs
 		const incomeStatementDataCalc = incomeStatementData.map((item) => ({
