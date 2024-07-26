@@ -47,4 +47,4 @@ function StackedAreaChart({ data }) {
     );
 }
 
-export default StackedAreaChart;
+export default StackedAreaChart; //test
