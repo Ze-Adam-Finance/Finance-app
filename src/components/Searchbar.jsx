@@ -36,18 +36,14 @@ function Searchbar({ selectedCompany, setSelectedCompany }) {
 						label: `${item.symbol} - ${item.name}`,
 					}));
   
-  				const formattedOptions = data.map((item) => ({
-								id: item.symbol,
-								label: item.symbol + " - " + item.name
-							}));
 
-							formattedOptions.sort((a, b) => {
-								const labelA = a.label.toLowerCase();
-								const labelB = b.label.toLowerCase();
-								if (labelA < labelB) return -1;
-								if (labelA > labelB) return 1;
-								return 0;
-							});
+					formattedOptions.sort((a, b) => {
+						const labelA = a.label.toLowerCase();
+						const labelB = b.label.toLowerCase();
+						if (labelA < labelB) return -1;
+						if (labelA > labelB) return 1;
+						return 0;
+					});
  
 
 					setOptions(formattedOptions); // Update options with fetched data

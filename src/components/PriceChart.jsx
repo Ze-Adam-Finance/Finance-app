@@ -1,15 +1,15 @@
 import React, { PureComponent } from 'react';
-import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
+import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 
 
 
-function RevenueChart({data}) {
+function PriceChart({data}) {
 
 
   return (
     <div style={{ width: 500, height: 250 }}>
         <ResponsiveContainer width="100%" height="100%" minHeight={250}>
-            <AreaChart
+            <LineChart
                 data={data}
                 margin={{
                     top: 10,
@@ -22,11 +22,11 @@ function RevenueChart({data}) {
                 <XAxis dataKey="date" />
                 <YAxis />
                 <Tooltip />
-                <Area type="monotone" dataKey="close" stroke="#8884d8" fill="#8884d8" />
-            </AreaChart>
+                <Line type="monotone" dataKey="close" stroke="#8884d8" fill="#8884d8" dot={false} />
+            </LineChart>
         </ResponsiveContainer>
     </div>
   );
 }
 
-export default RevenueChart;
+export default PriceChart;
