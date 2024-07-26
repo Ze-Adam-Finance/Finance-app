@@ -17,11 +17,7 @@ const TabPanel = (props) => {
 			aria-labelledby={`tab-${index}`}
 			{...other}
 		>
-			{value === index && (
-				<Box sx={{ p: 3 }}>
-					{children}
-				</Box>
-			)}
+			{value === index && <Box sx={{ p: 3 }}>{children}</Box>}
 		</div>
 	);
 };
@@ -59,7 +55,7 @@ const TabsComponent = ({ companyData, chartData, incomeStatementData, ratiosData
 				<Tab label="Charts" />
 			</Tabs>
 			<TabPanel value={value} index={0}>
-				<DataTable data={companyData} />
+				<CompanyProfileCard data={companyData} />
 			</TabPanel>
 			<TabPanel value={value} index={1}>
 				<PriceChart data={chartData} />
@@ -71,7 +67,7 @@ const TabsComponent = ({ companyData, chartData, incomeStatementData, ratiosData
 };
 
 TabsComponent.propTypes = {
-	companyData: PropTypes.array.isRequired,
+	companyData: PropTypes.object.isRequired,
 	chartData: PropTypes.array.isRequired,
 };
 
