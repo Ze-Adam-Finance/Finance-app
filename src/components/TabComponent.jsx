@@ -55,7 +55,7 @@ const TabsComponent = ({
 				aria-label="data and chart tabs"
 				centered
 			>
-				<Tab label="Data Table" />
+				<Tab label="Company Profile" />
 				<Tab label="Charts" />
 			</Tabs>
 			<TabPanel value={value} index={0}>
@@ -66,23 +66,29 @@ const TabsComponent = ({
 			</TabPanel>
 			<TabPanel value={value} index={1}>
 				<Box
+					sx={{
+						display: "flex",
+						flexDirection: { xs: "column", sm: "row" },
+						justifyContent: "space-between",
+						alignItems: "center",
+						width: "100%",
+						gap: "10%",
+						mt: "5%",
+					}}
+				>
+					<Box
 						sx={{
-							display: "flex",
-							flexDirection: {xs: "column", sm: "row"},
-							justifyContent: "space-between",
-							alignItems: "center",
-							width: "100%",
-							gap: "10%",
-							mt: "5%"
+							flex: 1,
+							minWidth: "300px",
+							mb: { xs: 2, sm: 0 },
 						}}
 					>
-						<Box sx={{ flex: 1 }}>
-							<RevenueExpensesProfit data={incomeStatementData} />
-						</Box>
-						<Box sx={{ flex: 1 }}>
-							<RatiosChart data={ratiosData} />
-						</Box>
+						<RevenueExpensesProfit data={incomeStatementData} />
 					</Box>
+					<Box sx={{ flex: 1, minWidth: "300px" }}>
+						<RatiosChart data={ratiosData} />
+					</Box>
+				</Box>
 			</TabPanel>
 		</Box>
 	);
