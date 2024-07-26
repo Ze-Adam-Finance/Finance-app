@@ -68,6 +68,7 @@ const TabsComponent = ({
 				<Box
 						sx={{
 							display: "flex",
+							flexDirection: {xs: "column", sm: "row"},
 							justifyContent: "space-between",
 							alignItems: "center",
 							width: "100%",

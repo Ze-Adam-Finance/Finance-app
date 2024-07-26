@@ -1,10 +1,11 @@
 import React from 'react';
 import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
-
+import { useMediaQuery } from '@mui/material';
 
 
 
 function StackedAreaChart({ data }) {
+    const isTabletOrBelow = useMediaQuery('(max-width: 768px)');
 
     const CustomTooltip = ({ active, payload }) => {
         if (active && payload && payload.length) {
@@ -22,9 +23,9 @@ function StackedAreaChart({ data }) {
         return null;
     };
     return (
-        <div style={{ width: 500, height: 250 }}>
-            <ResponsiveContainer width={500} height={250}>
-                <AreaChart data={data} >
+        <div style={{ width: isTabletOrBelow ? '100%' : 500, height: 286 }}>
+            <ResponsiveContainer width={isTabletOrBelow ? '100%' : 500} height={250}>
+                <AreaChart data={data} margin={{left: 30,}}>
                     <CartesianGrid strokeDasharray="3 3" />
                     <XAxis dataKey="calendarYear"/>
                     <YAxis 
@@ -42,7 +43,7 @@ function StackedAreaChart({ data }) {
                     <Area type="monotone" dataKey="netIncome" stroke="#07911e" fill="#07911e" />
                     {/* Add more Area components for additional lines */}
                 </AreaChart>
-                <div style={{height:36}}></div>
+                <div style={{ height: 36}}></div>
             </ResponsiveContainer>
         </div>
     );

@@ -33,19 +33,19 @@ export async function getFullCompanyData(company) {
 		//reorder
 		console.log(chartData);
 
-		if (chartData.historical.length > 0) {
+		if (chartData.historical) {
 			chartData.historical.sort(
 				(a, b) => new Date(a.date) - new Date(b.date)
 			);
 		}
 
-		if (incomeStatementData.length > 0) {
+		if (incomeStatementData) {
 			incomeStatementData.sort(
 				(a, b) => new Date(a.date) - new Date(b.date)
 			);
 		}
 
-		if (ratiosData.length > 0) {
+		if (ratiosData) {
 			ratiosData.sort((a, b) => new Date(a.date) - new Date(b.date));
 		}
 
