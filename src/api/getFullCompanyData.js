@@ -33,7 +33,7 @@ export async function getFullCompanyData(company) {
 		//reorder
     console.log(chartData)
 
-		if(chartData.length > 0) {
+		if(chartData.historical.length > 0) {
       chartData.historical.sort(
         (a, b) => new Date(a.date) - new Date(b.date)
       );
