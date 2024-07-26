@@ -79,8 +79,12 @@ const App = () => {
 			<Box
 				sx={{
 					display: "flex",
-					flexDirection: "row",
+
 					alignItems: "center",
+					flexDirection: {
+						xs: "column",
+						sm: "row",
+					},
 					gap: "10px",
 					width: "100%",
 				}}
@@ -106,7 +110,10 @@ const App = () => {
 						flexDirection: "row",
 						alignItems: "center",
 						gap: "10px",
-						width: "100%",
+						width: {
+							xs: "75%",
+							sm: "100%",
+						},
 					}}
 				>
 					<Searchbar
