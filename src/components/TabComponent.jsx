@@ -1,7 +1,7 @@
 import { useState } from "react";
 import PropTypes from "prop-types";
 import { Box, Tabs, Tab, Typography } from "@mui/material";
-import DataTable from "./DataTable";
+import CompanyProfileCard from "./CompanyProfileCard";
 import PriceChart from "./PriceChart";
 import RevenueExpensesProfit from "./RevenueExpensesProfit";
 import RatiosChart from "./RatiosChart";

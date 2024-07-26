@@ -29,11 +29,11 @@ const RatiosChart = ({ data }) => {
 
       {/* Styled buttons */}
       <div style={{ display: 'flex', justifyContent: 'center', gap: '10px', marginLeft: '10%'  }}>
-        <button class="ratioButton" onClick={() => handleColumnChange('priceEarningsRatio')} >PE</button>
-        <button class="ratioButton" onClick={() => handleColumnChange('priceToBookRatio')} >PB</button>
-        <button class="ratioButton" onClick={() => handleColumnChange('priceToSalesRatio')} >PS</button>
-        <button class="ratioButton" onClick={() => handleColumnChange('priceEarningsToGrowthRatio')} >PEG</button>
-        <button class="ratioButton" onClick={() => handleColumnChange('debtEquityRatio')} >Debt/Equity</button>
+        <button className="ratioButton" onClick={() => handleColumnChange('priceEarningsRatio')} >PE</button>
+        <button className="ratioButton" onClick={() => handleColumnChange('priceToBookRatio')} >PB</button>
+        <button className="ratioButton" onClick={() => handleColumnChange('priceToSalesRatio')} >PS</button>
+        <button className="ratioButton" onClick={() => handleColumnChange('priceEarningsToGrowthRatio')} >PEG</button>
+        <button className="ratioButton" onClick={() => handleColumnChange('debtEquityRatio')} >Debt/Equity</button>
       </div>
     </div>
   );

@@ -15,7 +15,7 @@ const App = () => {
 		if (selectedCompany) {
 			getFullCompanyData(selectedCompany).then((data) => {
 				console.log("API call finished.", data);
-				setCompanyData(data.companyData);
+				setCompanyData(data.companyData[0]);
 				setChartData(data.chartData);
 				setIncomeStatementData(data.incomeStatementData);
 				setRatiosData(data.ratiosData);
