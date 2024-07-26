@@ -3,6 +3,8 @@ import PropTypes from "prop-types";
 import { Box, Tabs, Tab, Typography } from "@mui/material";
 import DataTable from "./DataTable";
 import PriceChart from "./PriceChart";
+import RevenueExpensesProfit from "./RevenueExpensesProfit";
+import RatiosChart from "./RatiosChart";
 
 const TabPanel = (props) => {
 	const { children, value, index, ...other } = props;
@@ -30,7 +32,7 @@ TabPanel.propTypes = {
 	value: PropTypes.number.isRequired,
 };
 
-const TabsComponent = ({ companyData, chartData }) => {
+const TabsComponent = ({ companyData, chartData, incomeStatementData, ratiosData }) => {
 	const [value, setValue] = useState(0);
 
 	const handleChange = (event, newValue) => {
@@ -61,6 +63,8 @@ const TabsComponent = ({ companyData, chartData }) => {
 			</TabPanel>
 			<TabPanel value={value} index={1}>
 				<PriceChart data={chartData} />
+				<RevenueExpensesProfit data={incomeStatementData} />
+				<RatiosChart data={ratiosData} />
 			</TabPanel>
 		</Box>
 	);

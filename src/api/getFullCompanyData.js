@@ -19,26 +19,38 @@ export async function getFullCompanyData(company) {
     const profileUrl = `https://financialmodelingprep.com/api/v3/profile/${companySymbol}?apikey=9ea462a62531d93aa2be881a058c3951`;
     const chartUrl = `https://fmpcloud.io/api/v3/historical-price-full/${companySymbol}?from=${lowerDate}&to=${upperDate}&serietype=line&apikey=9ea462a62531d93aa2be881a058c3951`;
     const incomeStatementUrl = `https://financialmodelingprep.com/api/v3/income-statement/${companySymbol}?period=annual&apikey=9ea462a62531d93aa2be881a058c3951`;
-    
+    const ratiosUrl = `https://financialmodelingprep.com/api/v3/ratios/${companySymbol}??period=annual&apikey=9ea462a62531d93aa2be881a058c3951`
+
+
     //?from=2018-03-12&to=2019-03-12&apikey=9ea462a62531d93aa2be881a058c3951
 
     //make API calls and wait for all to be ready
-    const [companyData, chartData, incomeStatementData] = await Promise.all([
+    const [companyData, chartData, incomeStatementData, ratiosData] = await Promise.all([
       getSpecificData(profileUrl),
       getSpecificData(chartUrl),
-      getSpecificData(incomeStatementUrl)
+      getSpecificData(incomeStatementUrl),
+      getSpecificData(ratiosUrl)
     ]);
 
     //reorder
     chartData.historical.sort((a, b) => new Date(a.date) - new Date(b.date));
+    incomeStatementData.sort((a, b) => new Date(a.date) - new Date(b.date));
+    ratiosData.sort((a, b) => new Date(a.date) - new Date(b.date));
+
+    //calculate full costs
+    const incomeStatementDataCalc = incomeStatementData.map((item) => ({
+      ...item,
+      fullCosts: item.costAndExpenses + item.incomeTaxExpense + item.interestExpense,
+    }));
     
-    console.log(incomeStatementData);
+    console.log(ratiosData);
 
     //return data object
     return {
       companyData: companyData,
       chartData: chartData.historical,
-      incomeStatementData: incomeStatementData
+      incomeStatementData: incomeStatementDataCalc,
+      ratiosData: ratiosData,
     };
   } catch (error) {
     console.error("Error fetching full company data:", error);

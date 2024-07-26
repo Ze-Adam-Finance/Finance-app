@@ -9,6 +9,7 @@ const App = () => {
 	const [companyData, setCompanyData] = useState([]);
 	const [chartData, setChartData] = useState([]);
 	const [incomeStatementData, setIncomeStatementData] = useState([]);
+	const [ratiosData, setRatiosData] = useState([]);
 
 
 
@@ -19,6 +20,7 @@ const App = () => {
 				setCompanyData(data.companyData);
 				setChartData(data.chartData);
 				setIncomeStatementData(data.incomeStatementData);
+				setRatiosData(data.ratiosData);
 			});
 		}
 	}, [selectedCompany]);
@@ -66,7 +68,7 @@ const App = () => {
 					>
 						{selectedCompany}
 					</Typography>
-					<TabComponent companyData={companyData} chartData={chartData} incomeStatementData={incomeStatementData} />
+					<TabComponent companyData={companyData} chartData={chartData} incomeStatementData={incomeStatementData} ratiosData ={ratiosData} />
 				</Box>
 			)}
 		</Container>
