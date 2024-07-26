@@ -1,7 +1,7 @@
 import { useState } from "react";
 import PropTypes from "prop-types";
-import { Box, Tabs, Tab, Typography } from "@mui/material";
-import DataTable from "./DataTable";
+import { Box, Tabs, Tab } from "@mui/material";
+import CompanyProfileCard from "./CompanyProfileCard";
 import RevenueChart from "./RevenueChart";
 
 const TabPanel = (props) => {
@@ -15,11 +15,7 @@ const TabPanel = (props) => {
 			aria-labelledby={`tab-${index}`}
 			{...other}
 		>
-			{value === index && (
-				<Box sx={{ p: 3 }}>
-					{children}
-				</Box>
-			)}
+			{value === index && <Box sx={{ p: 3 }}>{children}</Box>}
 		</div>
 	);
 };
@@ -57,7 +53,7 @@ const TabsComponent = ({ companyData, chartData }) => {
 				<Tab label="Charts" />
 			</Tabs>
 			<TabPanel value={value} index={0}>
-				<DataTable data={companyData} />
+				<CompanyProfileCard data={companyData} />
 			</TabPanel>
 			<TabPanel value={value} index={1}>
 				<RevenueChart data={chartData} />
@@ -67,7 +63,7 @@ const TabsComponent = ({ companyData, chartData }) => {
 };
 
 TabsComponent.propTypes = {
-	companyData: PropTypes.array.isRequired,
+	companyData: PropTypes.object.isRequired,
 	chartData: PropTypes.array.isRequired,
 };
 
