@@ -56,8 +56,16 @@ const App = () => {
 						width: "100%",
 					}}
 				>
-					<Typography component={"span"} variant={"h2"}>
-						Finance App
+					<Typography
+						component={"span"}
+						sx={{
+							display: "flex",
+							flexDirection: { xs: "column", md: "row" },
+						}}
+						variant={"h2"}
+					>
+						<span>Zeadam&nbsp;</span>{" "}
+						<span style={{ fontWeight: 600 }}>Finance</span>
 					</Typography>
 				</Box>
 
@@ -99,8 +107,12 @@ const App = () => {
 						{selectedCompany}
 					</Typography>
 
-					<TabComponent companyData={companyData} chartData={chartData} incomeStatementData={incomeStatementData} ratiosData ={ratiosData} />
-
+					<TabComponent
+						companyData={companyData}
+						chartData={chartData}
+						incomeStatementData={incomeStatementData}
+						ratiosData={ratiosData}
+					/>
 				</Box>
 			)}
 		</Container>

@@ -31,22 +31,23 @@ export async function getFullCompanyData(company) {
 			]);
 
 		//reorder
-    console.log(chartData)
+		console.log(chartData);
 
-		if(chartData.historical.length > 0) {
-      chartData.historical.sort(
-        (a, b) => new Date(a.date) - new Date(b.date)
-      );
-    }
+		if (chartData.historical.length > 0) {
+			chartData.historical.sort(
+				(a, b) => new Date(a.date) - new Date(b.date)
+			);
+		}
 
-    if(incomeStatementData.length > 0) {
-      incomeStatementData.sort((a, b) => new Date(a.date) - new Date(b.date));
-    }
+		if (incomeStatementData.length > 0) {
+			incomeStatementData.sort(
+				(a, b) => new Date(a.date) - new Date(b.date)
+			);
+		}
 
-    if(ratiosData. length > 0) {
-      ratiosData.sort((a, b) => new Date(a.date) - new Date(b.date));
-    }
-
+		if (ratiosData.length > 0) {
+			ratiosData.sort((a, b) => new Date(a.date) - new Date(b.date));
+		}
 
 		//calculate full costs
 		const incomeStatementDataCalc = incomeStatementData.map((item) => ({
