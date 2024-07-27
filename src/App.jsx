@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import { Container, Box, Divider, Typography } from "@mui/material";
 import TabComponent from "./components/TabComponent";
 import { getFullCompanyData } from "./api/getFullCompanyData";
+import { testingSimplywallstAPI } from "./api/testingSimplywallstAPI";
 
 const App = () => {
 	const [selectedCompany, setSelectedCompany] = useState("");
@@ -20,6 +21,10 @@ const App = () => {
 				setIncomeStatementData(data.incomeStatementData);
 				setRatiosData(data.ratiosData);
 			});
+
+			testingSimplywallstAPI(selectedCompany).then((data) => {
+				console.log(data);
+			})
 		}
 	}, [selectedCompany]);
 
