@@ -15,7 +15,7 @@ const App = () => {
 		if (selectedCompany) {
 			getFullCompanyData(selectedCompany).then((data) => {
 				console.log("API call finished.", data);
-				setCompanyData(data.companyData);
+				setCompanyData(data.companyData[0]);
 				setChartData(data.chartData);
 				setIncomeStatementData(data.incomeStatementData);
 				setRatiosData(data.ratiosData);
@@ -56,8 +56,17 @@ const App = () => {
 						width: "100%",
 					}}
 				>
-					<Typography component={"span"} variant={"h2"}>
-						Finance App
+					<Typography
+						component={"span"}
+						sx={{
+							display: "flex",
+							flexDirection: { xs: "column", md: "row" },
+						}}
+						variant={"h2"}
+					>
+						<span style={{ fontWeight: 600 }}>Black&nbsp;</span>{" "}
+						<span>Swan</span>
+						
 					</Typography>
 				</Box>
 
@@ -99,8 +108,12 @@ const App = () => {
 						{selectedCompany}
 					</Typography>
 
-					<TabComponent companyData={companyData} chartData={chartData} incomeStatementData={incomeStatementData} ratiosData ={ratiosData} />
-
+					<TabComponent
+						companyData={companyData}
+						chartData={chartData}
+						incomeStatementData={incomeStatementData}
+						ratiosData={ratiosData}
+					/>
 				</Box>
 			)}
 		</Container>
