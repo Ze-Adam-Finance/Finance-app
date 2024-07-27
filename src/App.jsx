@@ -64,8 +64,9 @@ const App = () => {
 						}}
 						variant={"h2"}
 					>
-						<span>Zeadam&nbsp;</span>{" "}
-						<span style={{ fontWeight: 600 }}>Finance</span>
+						<span style={{ fontWeight: 600 }}>Black&nbsp;</span>{" "}
+						<span>Swan</span>
+						
 					</Typography>
 				</Box>
 
