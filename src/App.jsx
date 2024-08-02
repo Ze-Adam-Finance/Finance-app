@@ -38,7 +38,7 @@ const App = () => {
 		>
 			<Box
 				sx={{
-					position: "fixed",
+					position: "absolute",
 					top: 16,
 					right: 16,
 					zIndex: 1000,
@@ -126,6 +126,7 @@ const App = () => {
 						variant={"h4"}
 						sx={{
 							mb: 4,
+							textAlign: "center",
 						}}
 					>
 						{selectedCompany}
