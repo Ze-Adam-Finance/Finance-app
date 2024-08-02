@@ -1,8 +1,9 @@
 import Searchbar from "./components/Searchbar";
 import { useState, useEffect } from "react";
-import { Container, Box, Divider, Typography } from "@mui/material";
+import { Container, Box, Divider, Typography, useTheme } from "@mui/material";
 import TabComponent from "./components/TabComponent";
 import { getFullCompanyData } from "./api/getFullCompanyData";
+import DarkModeToggle from "./components/DarkModeToggle";
 
 const App = () => {
 	const [selectedCompany, setSelectedCompany] = useState("");
@@ -23,6 +24,8 @@ const App = () => {
 		}
 	}, [selectedCompany]);
 
+	const theme = useTheme();
+
 	return (
 		<Container
 			sx={{
@@ -33,6 +36,9 @@ const App = () => {
 				pt: 4,
 			}}
 		>
+			<Box display="flex" mt={1} justifyContent="flex-end">
+				<DarkModeToggle />
+			</Box>
 			<Box
 				sx={{
 					display: "flex",
