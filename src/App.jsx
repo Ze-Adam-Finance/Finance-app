@@ -4,6 +4,7 @@ import { Container, Box, Divider, Typography, useTheme } from "@mui/material";
 import TabComponent from "./components/TabComponent";
 import { getFullCompanyData } from "./api/getFullCompanyData";
 import DarkModeToggle from "./components/DarkModeToggle";
+import DefaultContainer from "./components/DefaultContainer";
 
 const App = () => {
 	const [selectedCompany, setSelectedCompany] = useState("");
@@ -111,7 +112,7 @@ const App = () => {
 				</Box>
 			</Box>
 			<Divider sx={{ width: "100%", my: 4 }} />
-			{selectedCompany && (
+			{selectedCompany ? (
 				<Box
 					sx={{
 						display: "flex",
@@ -137,6 +138,8 @@ const App = () => {
 						ratiosData={ratiosData}
 					/>
 				</Box>
+			) : (
+				<DefaultContainer />
 			)}
 		</Container>
 	);
