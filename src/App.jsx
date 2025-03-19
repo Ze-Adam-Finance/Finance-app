@@ -69,15 +69,15 @@ const App = () => {
 					}}
 				>
 					<img
-						src="/blackswan.png" // Path to your PNG logo
+						src="/blackswan.png" 
 						alt="Black Swan Logo"
 						style={{
-							maxWidth: "100px", // Default size
-							maxHeight: "100px", // Default size
+							maxWidth: "100px", 
+							maxHeight: "100px",
 							filter:
 								theme.palette.mode === "dark"
 									? "invert(1)"
-									: "none", // Invert colors for dark mode
+									: "none",
 						}}
 					/>
 					<Typography

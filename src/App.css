@@ -1,42 +1,52 @@
+/* Styles for the root element */
 #root {
-	max-width: 1280px;
-	margin: 0 auto;
-	padding: 2rem;
-	text-align: center;
+    max-width: 1280px; /* Maximum width of the root element */
+    margin: 0 auto; /* Center the root element horizontally */
+    padding: 2rem; /* Padding around the root element */
+    text-align: center; /* Center-align text within the root element */
 }
 
+/* Styles for elements with the class "logo" */
 .logo {
-	height: 6em;
-	padding: 1.5em;
-	will-change: filter;
-	transition: filter 300ms;
+    height: 6em; /* Set the height of the logo */
+    padding: 1.5em; /* Padding around the logo */
+    will-change: filter; /* Hint to the browser that the filter property will change */
+    transition: filter 300ms; /* Smooth transition for the filter property over 300ms */
 }
+
+/* Styles for the logo on hover */
 .logo:hover {
-	filter: drop-shadow(0 0 2em #646cffaa);
+    filter: drop-shadow(0 0 2em #646cffaa); /* Apply a drop shadow effect on hover */
 }
+
+/* Additional hover styles for elements with both "logo" and "react" classes */
 .logo.react:hover {
-	filter: drop-shadow(0 0 2em #61dafbaa);
+    filter: drop-shadow(0 0 2em #61dafbaa); /* Apply a different drop shadow effect on hover */
 }
 
+/* Keyframes for spinning the logo */
 @keyframes logo-spin {
-	from {
-		transform: rotate(0deg);
-	}
-	to {
-		transform: rotate(360deg);
-	}
+    from {
+        transform: rotate(0deg); /* Start at 0 degrees rotation */
+    }
+    to {
+        transform: rotate(360deg); /* End at 360 degrees rotation */
+    }
 }
 
+/* Apply the spinning animation to the second link's logo if reduced motion is not preferred */
 @media (prefers-reduced-motion: no-preference) {
-	a:nth-of-type(2) .logo {
-		animation: logo-spin infinite 20s linear;
-	}
+    a:nth-of-type(2) .logo {
+        animation: logo-spin infinite 20s linear; /* Spin the logo infinitely over 20 seconds */
+    }
 }
 
+/* Styles for elements with the class "card" */
 .card {
-	padding: 2em;
+    padding: 2em; /* Padding around the card */
 }
 
+/* Styles for elements with the class "read-the-docs" */
 .read-the-docs {
-	color: #888;
+    color: #888; /* Set the text color to a gray shade */
 }
